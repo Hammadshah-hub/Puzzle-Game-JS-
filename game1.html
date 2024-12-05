@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puzzle Game</title>
+    <link rel="stylesheet" href="game1.css">
+</head>
+
+<body>
+    <!-- Mobile-style Container -->
+    <div id="mobile-screen" class="mobile-container">
+        <div class="notch"></div>
+
+        <!-- Start Screen -->
+        <div id="start-screen" class="screen">
+            <h1 class="game-name" id="game-name">Puzzle Game</h1>
+            <div class="sticker-container">
+                <!-- Sticker 1 -->
+                <img src="https://cdn-icons-png.flaticon.com/512/8028/8028026.png" alt="Sticker 1"
+                    class="sticker" />
+                <!-- Sticker 2 -->
+                <img src="https://cdn-icons-png.flaticon.com/512/13/13973.png" alt="Sticker 2"
+                    class="sticker" />
+                <!-- Sticker 3 -->
+                <img src="https://cdn-icons-png.flaticon.com/512/5339/5339184.png" alt="Sticker 3"
+                    class="sticker" />
+            </div>
+
+            <!-- Added message above the play button -->
+            <h1 class="message-top">Drag and Drop Puzzle Game, Drag he Box For Start The Timer</h1>
+            <button id="start-btn" class="play-button">Play the Game</button>
+        </div>
+
+        <!-- Actual Game Interface -->
+        <div id="game-screen" class="screen" style="display: none;">
+            <h2 class="game-name">Puzzle Game</h2>
+
+            <!-- Top Bar -->
+            <div class="top-bar">
+                <button id="timer-btn" class="top-button">Timer: 00:30</button>
+            </div>
+
+            <!-- Message Display -->
+            <div id="message-container"></div>
+            <div id="record-display"></div>
+
+            <div id="result-modal">
+                <div id="modal-message"></div>
+                <button id="close-modal">Close</button>
+            </div>
+
+            <!-- Game Buttons -->
+            <div class="button-grid">
+                <button class="game-button" draggable="true">1</button>
+                <button class="game-button" draggable="true">2</button>
+                <button class="game-button" draggable="true">3</button>
+                <button class="game-button" draggable="true">4</button>
+                <button class="game-button" draggable="true">5</button>
+                <button class="game-button" draggable="true">6</button>
+                <button class="game-button" draggable="true">7</button>
+                <button class="game-button" draggable="true">8</button>
+                <button class="game-button" draggable="true">9</button>
+                <button class="game-button" draggable="true">10</button>
+                <button class="game-button" draggable="true">11</button>
+                <button class="game-button" draggable="true">12</button>
+            </div>
+
+            <!-- Retry Button -->
+            <div class="bottom-bar">
+                <button id="retry-btn" class="ok-button">Try Again</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game11.js"></script>
+</body>
+
+</html>
