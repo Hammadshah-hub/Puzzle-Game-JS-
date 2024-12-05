@@ -29,12 +29,10 @@ body {
 }
 
 /* Sticker container */
-/* Sticker Container */
 .sticker-container {
     display: flex;
     justify-content: center;
     gap: 20px;
-    /* Space between stickers */
     margin-top: 20px;
     margin-bottom: 20px;
     flex-wrap: wrap;
@@ -54,9 +52,7 @@ body {
 /* Hover Effects for Stickers */
 .sticker:hover {
     transform: scale(1.1);
-    /* Scale up on hover */
     box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.4);
-    /* Enhanced shadow on hover */
 }
 
 /* Add a subtle rotation animation */
@@ -107,39 +103,6 @@ body {
     color: white;
 }
 
-/* Play Game Button */
-.play-button {
-    background-color: #0056b3;
-    color: white;
-    font-size: 20px;
-    padding: 15px 40px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.3s ease;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-    margin-top: 24px;
-    animation: buttonAnimation 0.8s ease-in-out both;
-}
-
-.play-button:hover {
-    background: #007BFF;
-    transform: scale(1.05);
-}
-
-/* Button animation for Play Game */
-@keyframes buttonAnimation {
-    0% {
-        transform: translateY(-30px);
-        opacity: 0;
-    }
-
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
 /* Game Name */
 .game-name {
     text-align: center;
@@ -149,76 +112,7 @@ body {
     text-shadow: 1px 1px 5px #000;
 }
 
-/* Top Bar */
-.top-bar {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-}
-
-.top-button {
-    background: #444;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    padding: 8px;
-    font-size: 12px;
-    flex-grow: 1;
-    margin: 0 5px;
-    cursor: pointer;
-    text-align: center;
-    transition: background 0.3s ease;
-}
-
-.top-button:hover {
-    background: #555;
-}
-
-
-
-
-/* Mobile Container */
-.mobile-container {
-    width: 280px;
-    height: 550px;
-    background: #1f1f1f;
-    border-radius: 40px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.6);
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-/* Message Container for feedback */
-#message-container {
-    font-size: 16px;
-    color: white;
-    text-align: center;
-    margin-top: 10px;
-}
-
-/* Notch */
-.notch {
-    width: 100px;
-    height: 8px;
-    background: #333;
-    border-radius: 5px;
-    margin-top: 10px;
-}
-
-/* Screen */
-.screen {
-    width: 100%;
-    height: 100%;
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    color: white;
-}
-
-/* Play Game Button */
+/* Play Button */
 .play-button {
     background-color: #0056b3;
     color: white;
@@ -230,7 +124,7 @@ body {
     transition: background 0.3s ease, transform 0.3s ease;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
     margin-top: 50px;
-    animation: buttonAnimation 0.8s ease-in-out both;
+    animation: playButtonBounce 2s infinite;
 }
 
 .play-button:hover {
@@ -238,35 +132,43 @@ body {
     transform: scale(1.05);
 }
 
-/* Button animation for Play Game */
-@keyframes buttonAnimation {
+/* Keyframes for Play Button Bounce */
+@keyframes playButtonBounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Animation for Drag and Drop Message */
+.drag-message {
+    font-size: 24px;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    margin-bottom: 20px;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeInSlideDown 1.5s forwards;
+}
+
+/* Animation Keyframes for message */
+@keyframes fadeInSlideDown {
     0% {
-        transform: translateY(-30px);
         opacity: 0;
+        transform: translateY(-20px);
     }
 
     100% {
-        transform: translateY(0);
         opacity: 1;
+        transform: translateY(0);
     }
-}
-
-/* Game Name */
-.game-name {
-    text-align: center;
-    font-size: 20px;
-    margin-bottom: 10px;
-    color: #c4a6e0;
-    text-shadow: 1px 1px 5px #000;
-}
-
-/* Message above the play button */
-.message-top {
-    text-align: center;
-    font-size: 16px;
-    color: white;
-    margin-bottom: 20px;
-    /* Adjust the space between the message and play button */
 }
 
 /* Top Bar */
@@ -297,7 +199,7 @@ body {
 /* Button Grid */
 .button-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 10px;
     margin-top: auto;
 }
@@ -377,71 +279,8 @@ body {
     background-color: #0056b3;
 }
 
-#result-modal {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 300px;
-    padding: 20px;
-    background: white;
-    border: 2px solid black;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-    text-align: center;
-}
-
-#record-display {
-    display: none;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: blue;
-    text-align: center;
-}
-
-#result-modal {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 300px;
-    padding: 20px;
-    background: white;
-    border: 2px solid black;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-    text-align: center;
-}
-
-#close-modal {
-    margin-top: 10px;
-    padding: 5px 10px;
-    background: black;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
 /* Bottom Bar */
 .bottom-bar {
     margin-top: 10px;
     text-align: center;
-}
-
-.ok-button {
-    width: 100%;
-    background: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 15px;
-    padding: 10px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.ok-button:hover {
-    background: #0056b3;
 }

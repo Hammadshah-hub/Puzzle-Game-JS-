@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let timeLeft = 30;
     let gameStarted = false;
     let gameOver = false;
-    let bestTime = null; // Store the best time
+    let bestTime = null;
 
     // Elements
     const startBtn = document.getElementById('start-btn');
@@ -18,15 +18,13 @@ document.addEventListener('DOMContentLoaded', () => {
     startBtn.addEventListener('click', () => {
         startScreen.style.display = 'none';
         gameScreen.style.display = 'flex';
-        retryBtn.style.display = 'block'; // Show the retry button when the game starts
+        retryBtn.style.display = 'block';
         shuffleButtons();
     });
 
     // Shuffle buttons randomly
     function shuffleButtons() {
-        const shuffledNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].sort(
-            () => Math.random() - 0.5
-        );
+        const shuffledNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9].sort(() => Math.random() - 0.5);
         gameButtons.forEach((btn, index) => {
             btn.textContent = shuffledNumbers[index];
         });
@@ -60,10 +58,15 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('dragstart', (e) => {
             if (!gameStarted && !gameOver) startTimer();
             e.dataTransfer.setData('text/plain', e.target.textContent);
+            e.target.style.opacity = '0.5'; // Reduce opacity while dragging
+        });
+
+        button.addEventListener('dragend', (e) => {
+            e.target.style.opacity = '1'; // Reset opacity after drop
         });
 
         button.addEventListener('dragover', (e) => {
-            e.preventDefault();
+            e.preventDefault(); // Allow drop
         });
 
         button.addEventListener('drop', (e) => {
@@ -77,10 +80,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 (btn) => btn.textContent === draggedValue
             );
 
-            if (isAdjacent(e.target, draggedButton)) {
+            if (draggedButton && draggedButton !== e.target && isStraightMove(e.target, draggedButton)) {
+                // Swap the dragged and target button values
                 e.target.textContent = draggedValue;
                 draggedButton.textContent = targetValue;
 
+                // Check if the puzzle is solved
                 if (checkIfSolved()) {
                     clearInterval(timer);
                     handleWin();
@@ -89,19 +94,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Check if two buttons are adjacent
-    function isAdjacent(target, draggedButton) {
+    // Check if two buttons are in a straight horizontal or vertical line
+    function isStraightMove(target, draggedButton) {
         const targetIndex = gameButtons.indexOf(target);
         const draggedButtonIndex = gameButtons.indexOf(draggedButton);
 
-        const targetRow = Math.floor(targetIndex / 4);
-        const draggedRow = Math.floor(draggedButtonIndex / 4);
+        const targetRow = Math.floor(targetIndex / 3);
+        const draggedRow = Math.floor(draggedButtonIndex / 3);
 
-        return (
-            Math.abs(targetIndex - draggedButtonIndex) === 1 &&
-            targetRow === draggedRow || // Horizontal adjacency
-            Math.abs(targetIndex - draggedButtonIndex) === 4 // Vertical adjacency
-        );
+        const targetColumn = targetIndex % 3;
+        const draggedColumn = draggedButtonIndex % 3;
+
+        // Allow moves within the same row or the same column
+        return targetRow === draggedRow || targetColumn === draggedColumn;
     }
 
     // Check if the puzzle is solved
@@ -143,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
         gameStarted = false;
         gameOver = false;
         messageContainer.textContent = '';
-        messageContainer.style.display = 'none'; // Hide messages after reset
+        messageContainer.style.display = 'none';
         clearInterval(timer);
         updateTimerDisplay();
         shuffleButtons();
